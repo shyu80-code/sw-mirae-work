@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SW미래채움 강사 실기예상문제</title>
+    <style>
+        :root {
+            --header-bg: #1e3a8a;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #cbd5e1;
+            --ok: #16a34a;
+            --ok-bg: #dcfce7;
+            --ng: #dc2626;
+            --ng-bg: #fee2e2;
+        }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.6;
+        }
+        .header-banner {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 30px 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .logo-badge { background: white; color: var(--header-bg); padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 0.9em; }
+        .back-link { color: #93c5fd; text-decoration: none; font-size: 0.9em; }
+        .back-link:hover { text-decoration: underline; }
+        .header-title h1 { margin: 0 0 10px 0; font-size: 1.8em; }
+        .header-title p { margin: 0; color: #93c5fd; font-size: 0.95em; }
+        .container { max-width: 900px; margin: -30px auto 40px auto; padding: 0 20px; }
+        .card {
+            background: var(--card-bg);
+            padding: 25px 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip {
+            border: 1px solid var(--border-color);
+            background: #fff;
+            padding: 6px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-family: inherit;
+        }
+        .chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        button.btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-family: inherit;
+        }
+        button.btn:hover { background: var(--primary-hover); }
+        button.btn.secondary { background: #64748b; }
+        .q-head { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+        .q-no { font-weight: bold; color: var(--primary); }
+        .tag { font-size: 0.75em; padding: 2px 8px; border-radius: 6px; background: #e0f2fe; color: #0284c7; font-weight: bold; }
+        .tag.type { background: #f3e8ff; color: #9333ea; }
+        .q-text { font-weight: 600; margin: 0 0 10px 0; white-space: pre-wrap; }
+        pre.code {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 14px 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: Consolas, 'D2Coding', monospace;
+            font-size: 0.9em;
+            margin: 0 0 12px 0;
+        }
+        .opts { display: flex; flex-direction: column; gap: 8px; }
+        .opts label {
+            display: flex; gap: 8px; align-items: center;
+            padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer;
+        }
+        .opts label:hover { background: #f1f5f9; }
+        input[type=text] {
+            width: 100%; box-sizing: border-box; padding: 12px;
+            border: 1px solid var(--border-color); border-radius: 8px; font-size: 1em; font-family: inherit;
+        }
+        input[type=text]:focus { outline: none; border-color: var(--primary); }
+        .result { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 0.95em; display: none; }
+        .result.ok { background: var(--ok-bg); color: #166534; display: block; }
+        .result.ng { background: var(--ng-bg); color: #991b1b; display: block; }
+        .result .exp { color: var(--text-color); margin-top: 6px; white-space: pre-wrap; }
+        .actions { margin-top: 12px; display: flex; gap: 8px; }
+        .score-box { text-align: center; font-size: 1.2em; font-weight: bold; }
+        .score-box span { color: var(--primary); font-size: 1.5em; }
+        .muted { color: #64748b; font-size: 0.85em; }
+    </style>
+</head>
+<body>
+    <div class="header-banner">
+        <div class="header-top">
+            <span class="logo-badge">SW미래채움</span>
+            <a class="back-link" href="index.html">← 강사 실적 관리로 돌아가기</a>
+        </div>
+        <div class="header-title">
+            <h1>SW미래채움 강사 실기예상문제</h1>
+            <p>컴퓨팅 사고력 · 블록코딩 · 파이썬 · 피지컬 컴퓨팅 · 인공지능 · 수업 운영 (총 37문항)</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="toolbar">
+                <div class="chips" id="chips"></div>
+                <div>
+                    <button class="btn secondary" id="shuffleBtn">문제 섞기</button>
+                    <button class="btn secondary" id="resetBtn">초기화</button>
+                </div>
+            </div>
+            <p class="muted" style="margin:12px 0 0 0;">단답형은 공백·대소문자를 구분하지 않고 채점합니다. 각 문제의 [정답 확인]을 눌러 채점하세요.</p>
+        </div>
+
+        <div class="card score-box" id="scoreBox"></div>
+        <div id="list"></div>
+    </div>
+
+<script>
+// type: 'choice' (answer = 보기 인덱스) | 'short' (answer = 허용 답 배열) | 'code' (short + 코드 표시)
+const QUESTIONS = [
+    // ---------- 컴퓨팅 사고력 ----------
+    { cat: '컴퓨팅 사고력', type: 'choice', q: '컴퓨팅 사고력의 구성 요소 중, 복잡한 문제를 해결하기 쉬운 여러 개의 작은 문제로 나누는 것은?',
+      opts: ['추상화', '분해', '패턴 인식', '자동화'], answer: 1,
+      exp: '분해(Decomposition)는 큰 문제를 작은 단위로 나누는 과정입니다.' },
+    { cat: '컴퓨팅 사고력', type: 'short', q: '문제 해결에 꼭 필요한 핵심 요소만 남기고 불필요한 세부 사항을 걸러내는 컴퓨팅 사고력 요소를 쓰시오.',
+      answer: ['추상화'], exp: '추상화(Abstraction): 핵심만 추려 일반화하는 과정입니다.' },
+    { cat: '컴퓨팅 사고력', type: 'choice', q: '컴퓨터(기기) 없이 카드, 게임, 몸 활동 등으로 컴퓨팅 개념을 배우는 교육 방식은?',
+      opts: ['피지컬 컴퓨팅', '언플러그드 활동', '시뮬레이션', '프로젝트 학습'], answer: 1,
+      exp: '언플러그드(Unplugged) 활동은 컴퓨터 없이 알고리즘·이진수 등을 체험하는 활동입니다.' },
+    { cat: '컴퓨팅 사고력', type: 'short', q: '프로그램의 오류(버그)를 찾아서 수정하는 과정을 무엇이라 하는가?',
+      answer: ['디버깅', 'debugging'], exp: '디버깅(Debugging)은 오류의 원인을 찾아 고치는 과정입니다.' },
+    { cat: '컴퓨팅 사고력', type: 'choice', q: '알고리즘의 기본 제어 구조가 아닌 것은?',
+      opts: ['순차 구조', '선택 구조', '반복 구조', '삭제 구조'], answer: 3,
+      exp: '기본 제어 구조는 순차, 선택, 반복입니다.' },
+    { cat: '컴퓨팅 사고력', type: 'choice', q: '순서도에서 "조건에 따라 Yes/No로 분기"하는 판단을 나타내는 기호의 모양은?',
+      opts: ['사각형', '마름모', '타원', '평행사변형'], answer: 1,
+      exp: '마름모는 판단(조건 분기), 사각형은 처리, 타원은 시작/끝, 평행사변형은 입출력입니다.' },
+    { cat: '컴퓨팅 사고력', type: 'short', q: '1부터 100까지 정렬된 숫자 중 이진 탐색으로 임의의 수를 찾을 때, 최악의 경우 필요한 비교 횟수는? (숫자만)',
+      answer: ['7', '7번'], exp: '2^6=64 < 100 ≤ 2^7=128 이므로 최대 7번입니다.' },
+    { cat: '컴퓨팅 사고력', type: 'short', q: '버블 정렬(오름차순)로 [5, 3, 1]을 1회전(맨 앞부터 인접 요소 비교·교환 1패스) 수행한 결과를 쓰시오. (예: 1,2,3)',
+      answer: ['3,1,5', '[3,1,5]'], exp: '(5,3) 교환 → 3,5,1 → (5,1) 교환 → 3,1,5' },
+    { cat: '컴퓨팅 사고력', type: 'short', q: '10진수 13을 2진수로 나타내시오.',
+      answer: ['1101'], exp: '13 = 8+4+1 → 1101' },
+    { cat: '컴퓨팅 사고력', type: 'short', q: '2진수 1010을 10진수로 나타내시오.',
+      answer: ['10'], exp: '8+2 = 10' },
+    { cat: '컴퓨팅 사고력', type: 'short', q: '8비트로 표현할 수 있는 서로 다른 값의 개수는? (숫자만)',
+      answer: ['256'], exp: '2^8 = 256 (0~255)' },
+
+    // ---------- 블록코딩 ----------
+    { cat: '블록코딩', type: 'short', q: '엔트리에서 "10 만큼 움직이기" 블록이 "3번 반복하기" 블록 안에 들어 있다. 실행 후 오브젝트가 이동한 총 거리는? (숫자만)',
+      answer: ['30'], exp: '10 × 3 = 30' },
+    { cat: '블록코딩', type: 'choice', q: '프로그램에서 "점수", "생명" 처럼 값을 저장해 두고 바꿔 쓰기 위한 이름 붙은 저장 공간은?',
+      opts: ['함수', '변수', '이벤트', '좌표'], answer: 1,
+      exp: '변수는 값을 저장하고 변경할 수 있는 공간입니다.' },
+    { cat: '블록코딩', type: 'choice', q: '"만약 ~라면 아니면 ~" 블록이 해당하는 제어 구조는?',
+      opts: ['순차', '선택', '반복', '입력'], answer: 1,
+      exp: '조건에 따라 실행 경로가 갈리므로 선택 구조입니다.' },
+    { cat: '블록코딩', type: 'choice', q: '"스페이스 키를 눌렀을 때" 처럼 특정 사건이 발생하면 코드가 실행되도록 하는 블록 종류는?',
+      opts: ['시작(이벤트) 블록', '연산 블록', '모양 블록', '소리 블록'], answer: 0,
+      exp: '이벤트(시작) 블록은 코드 실행의 계기를 정의합니다.' },
+    { cat: '블록코딩', type: 'short', q: '변수 "점수"가 0일 때, "5번 반복: 점수를 2만큼 증가"를 실행하면 점수는? (숫자만)',
+      answer: ['10'], exp: '2 × 5 = 10' },
+    { cat: '블록코딩', type: 'choice', q: '같은 동작 묶음을 여러 번 쓸 때, 블록을 하나의 이름으로 묶어 재사용하는 기능은?',
+      opts: ['복제', '함수(나만의 블록)', '배경 변경', '신호 보내기'], answer: 1,
+      exp: '함수(또는 나만의 블록)로 중복을 줄이고 재사용성을 높일 수 있습니다.' },
+
+    // ---------- 파이썬 ----------
+    { cat: '파이썬', type: 'code', code: 'print(sum(range(1, 6)))', q: '위 코드의 출력 결과는?',
+      answer: ['15'], exp: 'range(1,6)은 1~5, 합은 15입니다.' },
+    { cat: '파이썬', type: 'code', code: 'for i in range(3):\n    print(i * 2, end=" ")', q: '위 코드의 출력 결과는? (공백으로 구분)',
+      answer: ['0 2 4'], exp: 'i = 0, 1, 2 → 0 2 4' },
+    { cat: '파이썬', type: 'code', code: 'print(len("SW미래채움"))', q: '위 코드의 출력 결과는?',
+      answer: ['6'], exp: '문자 S, W, 미, 래, 채, 움 → 6개' },
+    { cat: '파이썬', type: 'code', code: 'a = [3, 1, 2]\na.sort()\nprint(a[-1])', q: '위 코드의 출력 결과는?',
+      answer: ['3'], exp: '정렬 후 [1, 2, 3], 인덱스 -1은 마지막 요소 3입니다.' },
+    { cat: '파이썬', type: 'code', code: 'x = 7\nprint(x // 2, x % 2)', q: '위 코드의 출력 결과는? (공백으로 구분)',
+      answer: ['3 1'], exp: '7 // 2 = 3 (몫), 7 % 2 = 1 (나머지)' },
+    { cat: '파이썬', type: 'code', code: 'print("ab" * 3)', q: '위 코드의 출력 결과는?',
+      answer: ['ababab'], exp: '문자열 곱셈은 반복입니다.' },
+    { cat: '파이썬', type: 'code', code: 'def f(n):\n    return n * n if n > 0 else 0\n\nprint(f(-2) + f(3))', q: '위 코드의 출력 결과는?',
+      answer: ['9'], exp: 'f(-2)=0, f(3)=9 → 9' },
+    { cat: '파이썬', type: 'code', code: 'total = 0\nfor n in [1, 2, 3, 4]:\n    if n % 2 == 0:\n        total += n\nprint(total)', q: '위 코드의 출력 결과는?',
+      answer: ['6'], exp: '짝수 2 + 4 = 6' },
+
+    // ---------- 피지컬 컴퓨팅 ----------
+    { cat: '피지컬 컴퓨팅', type: 'short', q: '아두이노에서 디지털 핀에 HIGH/LOW 값을 출력하는 함수 이름은?',
+      answer: ['digitalWrite', 'digitalwrite', 'digitalWrite()'], exp: 'digitalWrite(핀번호, HIGH 또는 LOW)' },
+    { cat: '피지컬 컴퓨팅', type: 'short', q: '아두이노 스케치에서 전원이 켜진 뒤 딱 한 번만 실행되는 함수 이름은?',
+      answer: ['setup', 'setup()'], exp: 'setup()은 1회, loop()는 계속 반복 실행됩니다.' },
+    { cat: '피지컬 컴퓨팅', type: 'short', q: '아두이노에서 아날로그 센서 값을 읽는 함수 이름은?',
+      answer: ['analogRead', 'analogread', 'analogRead()'], exp: 'analogRead(핀) → 0~1023 값 반환' },
+    { cat: '피지컬 컴퓨팅', type: 'choice', q: '아두이노 우노의 analogRead()가 반환하는 값의 범위는?',
+      opts: ['0 ~ 255', '0 ~ 1023', '0 ~ 4095', '0 ~ 65535'], answer: 1,
+      exp: '10비트 ADC이므로 0~1023입니다. (0~255는 analogWrite의 PWM 범위)' },
+    { cat: '피지컬 컴퓨팅', type: 'short', q: '아두이노에서 delay(1500)은 몇 초 동안 멈추는가? (숫자만)',
+      answer: ['1.5', '1.5초'], exp: 'delay의 단위는 ms(밀리초)이며 1500ms = 1.5초입니다.' },
+    { cat: '피지컬 컴퓨팅', type: 'choice', q: 'LED를 아두이노에 연결할 때 저항을 함께 사용하는 가장 큰 이유는?',
+      opts: ['LED 밝기를 높이기 위해', '과전류로부터 LED를 보호하기 위해', '전압을 높이기 위해', '신호를 증폭하기 위해'], answer: 1,
+      exp: '저항으로 전류를 제한해 LED 손상을 막습니다.' },
+    { cat: '피지컬 컴퓨팅', type: 'short', q: '마이크로비트의 LED 매트릭스는 5×5이다. LED는 모두 몇 개인가? (숫자만)',
+      answer: ['25'], exp: '5 × 5 = 25개' },
+
+    // ---------- 인공지능 ----------
+    { cat: '인공지능', type: 'choice', q: '정답(레이블)이 붙은 데이터로 모델을 학습시키는 머신러닝 방식은?',
+      opts: ['지도학습', '비지도학습', '강화학습', '전이학습'], answer: 0,
+      exp: '지도학습은 입력과 정답 쌍으로 학습합니다. (예: 고양이/강아지 사진 분류)' },
+    { cat: '인공지능', type: 'short', q: '모델이 학습 데이터에만 지나치게 맞춰져서 새로운 데이터에서는 성능이 떨어지는 현상을 무엇이라 하는가?',
+      answer: ['과적합', '오버피팅', 'overfitting'], exp: '과적합(Overfitting): 일반화 성능 저하 현상입니다.' },
+    { cat: '인공지능', type: 'short', q: '생성형 AI가 사실이 아닌 내용을 그럴듯하게 만들어내는 현상을 무엇이라 하는가?',
+      answer: ['환각', '할루시네이션', 'hallucination'], exp: '환각(Hallucination): 출력 결과는 반드시 사실 확인이 필요합니다.' },
+
+    // ---------- 수업 운영 ----------
+    { cat: '수업 운영', type: 'choice', q: '수업 중 학생이 만든 작품을 사진·영상으로 기록해 외부(SNS 등)에 공개하려 한다. 가장 적절한 조치는?',
+      opts: ['수업용이므로 자유롭게 게시한다', '보호자(법정대리인) 동의를 확인한 뒤 활용한다', '이름만 가리고 모두 게시한다', '학생 본인이 구두로 허락하면 게시한다'], answer: 1,
+      exp: '미성년자 초상·개인정보 활용은 보호자 동의가 필요합니다.' },
+    { cat: '수업 운영', type: 'choice', q: '학생이 코드 오류로 막혔을 때 강사의 바람직한 지도 방법은?',
+      opts: ['정답 코드를 바로 알려준다', '오류 메시지·실행 결과를 함께 살펴보며 스스로 원인을 찾도록 질문한다', '다른 학생 코드를 복사하게 한다', '다음 차시로 넘어간다'], answer: 1,
+      exp: '질문을 통해 디버깅 사고 과정을 길러주는 것이 목표입니다.' }
+];
+
+const state = { cat: '전체', order: [], answered: {}, picks: {} };
+const cats = ['전체', ...Array.from(new Set(QUESTIONS.map(q => q.cat)))];
+const $ = id => document.getElementById(id);
+
+const norm = s => String(s).replace(/\s+/g, '').toLowerCase();
+
+function initOrder() { state.order = QUESTIONS.map((_, i) => i); }
+
+function shuffle() {
+    for (let i = state.order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [state.order[i], state.order[j]] = [state.order[j], state.order[i]];
+    }
+    render();
+}
+
+function renderChips() {
+    const box = $('chips');
+    box.innerHTML = '';
+    cats.forEach(c => {
+        const b = document.createElement('button');
+        b.className = 'chip' + (c === state.cat ? ' active' : '');
+        b.textContent = c;
+        b.onclick = () => { state.cat = c; render(); };
+        box.appendChild(b);
+    });
+}
+
+function renderScore() {
+    const ids = Object.keys(state.answered);
+    const ok = ids.filter(i => state.answered[i]).length;
+    $('scoreBox').innerHTML = `채점 ${ids.length} / ${QUESTIONS.length}문항 · 정답 <span>${ok}</span>개`;
+}
+
+function check(idx, card) {
+    const q = QUESTIONS[idx];
+    let correct = false;
+    if (q.type === 'choice') {
+        const sel = card.querySelector('input[type=radio]:checked');
+        if (!sel) { alert('보기를 선택하세요.'); return; }
+        correct = parseInt(sel.value, 10) === q.answer;
+    } else {
+        const v = card.querySelector('input[type=text]').value;
+        if (!v.trim()) { alert('답을 입력하세요.'); return; }
+        correct = q.answer.some(a => norm(a) === norm(v));
+    }
+    state.answered[idx] = correct;
+    showResult(idx, card, correct);
+    renderScore();
+}
+
+function showResult(idx, card, correct) {
+    const q = QUESTIONS[idx];
+    const ans = q.type === 'choice' ? `${q.answer + 1}번. ${q.opts[q.answer]}` : q.answer[0];
+    const r = card.querySelector('.result');
+    r.className = 'result ' + (correct ? 'ok' : 'ng');
+    r.innerHTML = '';
+    const head = document.createElement('strong');
+    head.textContent = correct ? '정답입니다!' : '오답입니다. 정답: ' + ans;
+    const exp = document.createElement('div');
+    exp.className = 'exp';
+    exp.textContent = q.exp;
+    r.append(head, exp);
+}
+
+function render() {
+    renderChips();
+    const list = $('list');
+    list.innerHTML = '';
+    let n = 0;
+    state.order.forEach(idx => {
+        const q = QUESTIONS[idx];
+        if (state.cat !== '전체' && q.cat !== state.cat) return;
+        n++;
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const head = document.createElement('div');
+        head.className = 'q-head';
+        head.innerHTML = '<span class="q-no"></span><span class="tag"></span><span class="tag type"></span>';
+        head.children[0].textContent = `문제 ${n}`;
+        head.children[1].textContent = q.cat;
+        head.children[2].textContent = q.type === 'choice' ? '객관식' : '단답형';
+        card.appendChild(head);
+
+        if (q.code) {
+            const pre = document.createElement('pre');
+            pre.className = 'code';
+            pre.textContent = q.code;
+            card.appendChild(pre);
+        }
+
+        const p = document.createElement('p');
+        p.className = 'q-text';
+        p.textContent = q.q;
+        card.appendChild(p);
+
+        if (q.type === 'choice') {
+            const opts = document.createElement('div');
+            opts.className = 'opts';
+            q.opts.forEach((o, i) => {
+                const lab = document.createElement('label');
+                const r = document.createElement('input');
+                r.type = 'radio'; r.name = 'q' + idx; r.value = i;
+                lab.append(r, document.createTextNode(`${i + 1}. ${o}`));
+                opts.appendChild(lab);
+            });
+            card.appendChild(opts);
+        } else {
+            const t = document.createElement('input');
+            t.type = 'text'; t.placeholder = '정답 입력';
+            t.addEventListener('keydown', e => { if (e.key === 'Enter') check(idx, card); });
+            card.appendChild(t);
+        }
+
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+        const btn = document.createElement('button');
+        btn.className = 'btn'; btn.textContent = '정답 확인';
+        btn.onclick = () => check(idx, card);
+        actions.appendChild(btn);
+        card.appendChild(actions);
+
+        const res = document.createElement('div');
+        res.className = 'result';
+        card.appendChild(res);
+
+        list.appendChild(card);
+    });
+    renderScore();
+}
+
+$('shuffleBtn').onclick = shuffle;
+$('resetBtn').onclick = () => { state.answered = {}; initOrder(); render(); };
+
+initOrder();
+render();
+</script>
+</body>
+</html>
